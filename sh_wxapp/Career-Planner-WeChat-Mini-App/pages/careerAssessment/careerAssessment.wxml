@@ -1,0 +1,24 @@
+<navigation-bar title="职业测评" back="{{true}}" color="#FFF" background="#1976D2"></navigation-bar>
+
+<view class="tab-bar">
+  <view class="tab-item tab-active">测评中心</view>
+  <view class="tab-item">测评结果</view>
+</view>
+
+<scroll-view class="assessment-list" scroll-y>
+  <view class="assessment-item" wx:for="{{assessments}}" wx:key="name" bindtap="navigateToDetail" data-name="{{item.name}}">
+    <view class="assessment-icon" style="background-color: {{item.iconColor}};">
+      <view class="{{item.iconClass}}"></view>
+    </view>
+    <view class="assessment-info">
+      <view class="assessment-title">{{item.name}}</view>
+      <view class="assessment-desc">{{item.description}}</view>
+    </view>
+    <view class="assessment-arrow"></view>
+  </view>
+</scroll-view>
+
+<view class="bottom-nav">
+  <view class="nav-item" bindtap="onTapHome">首页</view>
+  <view class="nav-item" bindtap="onTapProfile">我的</view>
+</view>

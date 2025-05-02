@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/activity-detail/activity-detail",
+    "pages/vip/vip",
+    "pages/community/community",
+    "pages/careerTest/careerTest",
+    "pages/aiPlan/aiPlan",
+    "pages/courses/courses",
+    "pages/resources/resources",
+    "pages/careerAssessment/careerAssessment",
+    "pages/profile/profile"
+  ],
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#1296db",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/vip/vip",
+        "text": "VIP"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "交流圈"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1976D2",
+    "navigationBarTitleText": "智能助手",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "renderer": "skyline",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "tagNameStyleIsolation": "legacy",
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "debug": true
+}

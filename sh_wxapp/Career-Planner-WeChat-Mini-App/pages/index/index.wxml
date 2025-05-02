@@ -1,0 +1,82 @@
+<!--index.wxml-->
+<navigation-bar title="智源方舟" back="{{false}}" color="#FFF" background="#1976D2" bind:menuclick="onMenuClick"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list" bindrefresherrefresh="onRefresh" refresher-enabled="{{true}}" refresher-triggered="{{refreshing}}">
+  <!-- 顶部横幅 -->
+  <view class="banner">
+    <view class="banner-content">
+      <view class="banner-title">校院速报</view>
+      <view class="banner-subtitle">NEWS</view>
+      <view class="banner-prompt">就是你！点击进来！</view>
+    </view>
+    <!-- 装饰元素 -->
+    <view class="banner-decoration corner-top-right"></view>
+    <view class="banner-decoration corner-bottom-left"></view>
+    <view class="banner-decoration shape-circle"></view>
+    <view class="banner-decoration shape-triangle"></view>
+  </view>
+
+  <!-- 主功能区 -->
+  <view class="feature-grid">
+    <view class="feature-row">
+      <view class="feature-item feature-career-test" bindtap="navigateTo" data-page="careerTest">
+        <view class="feature-icon icon-doc"></view>
+        <view class="feature-title">职业测试</view>
+        <view class="feature-desc">专属的指导</view>
+      </view>
+      <view class="feature-item feature-ai-plan" bindtap="navigateTo" data-page="aiPlan">
+        <view class="feature-icon icon-home"></view>
+        <view class="feature-title">AI规划</view>
+        <view class="feature-desc">职业发展答家</view>
+      </view>
+    </view>
+    <view class="feature-row">
+      <view class="feature-item feature-courses" bindtap="navigateTo" data-page="courses">
+        <view class="feature-icon icon-screen"></view>
+        <view class="feature-title">授课学习</view>
+        <view class="feature-desc">专业课程培训</view>
+      </view>
+      <view class="feature-item feature-resources" bindtap="navigateTo" data-page="resources">
+        <view class="feature-icon icon-vault"></view>
+        <view class="feature-title">资源宝库</view>
+        <view class="feature-desc">大数据资源推荐</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动推荐区 -->
+  <view class="activity-section">
+    <view class="section-title">活动推荐</view>
+    <view class="activity-list">
+      <view class="activity-item" wx:for="{{activities}}" wx:key="id" bindtap="viewActivity" data-id="{{item.id}}">
+        <view class="activity-info">
+          <view class="activity-title">{{item.title}}</view>
+          <view class="activity-time">报名日期：{{item.signupDate}}</view>
+          <view class="activity-time">举办日期：{{item.eventDate}}</view>
+        </view>
+        <view class="activity-right">
+          <image class="activity-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 底部导航栏 -->
+<view class="tab-bar">
+  <view class="tab-item tab-active">
+    <view class="tab-icon icon-home"></view>
+    <!-- <view class="tab-text">首页</view> -->
+  </view>
+  <view class="tab-item" bindtap="switchTab" data-tab="vip">
+    <view class="tab-icon icon-vip"></view>
+    <!-- <view class="tab-text">VIP</view> -->
+  </view>
+  <view class="tab-item" bindtap="switchTab" data-tab="community">
+    <view class="tab-icon icon-community"></view>
+    <!-- <view class="tab-text">交流圈</view> -->
+  </view>
+  <view class="tab-item" bindtap="switchTab" data-tab="profile">
+    <view class="tab-icon icon-profile"></view>
+    <!-- <view class="tab-text">我的</view> -->
+  </view>
+</view>

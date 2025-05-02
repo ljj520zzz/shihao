@@ -1,0 +1,375 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 0px; /* 为底部导航留出空间 */
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  width: 80%;
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 8px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+.nickname-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border-top: .5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.nickname-label {
+  width: 105px;
+}
+
+.nickname-input {
+  flex: 1;
+}
+
+/* 顶部横幅 */
+.banner {
+  position: relative;
+  background-color: #1976D2;
+  color: white;
+  padding: 20px 15px;
+  overflow: hidden;
+  height: 140px;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.banner-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.banner-subtitle {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+.banner-prompt {
+  font-size: 16px;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.banner-decoration {
+  position: absolute;
+  z-index: 1;
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #FFD700;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #FFD700;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.shape-circle {
+  bottom: 20px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.shape-triangle {
+  top: 30px;
+  right: 80px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* 主功能区 */
+.feature-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.feature-row {
+  display: flex;
+  gap: 15px;
+}
+
+.feature-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  border-radius: 12px;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #8D6E63; /* Default color, can be overridden by specific classes */
+}
+
+.feature-career-test {
+  background-color: #8D6E63; /* 棕色 */
+}
+
+.feature-ai-plan {
+  background-color: #4CAF50; /* 绿色 */
+}
+
+.feature-courses {
+  background-color: #2196F3; /* 蓝色 */
+}
+
+.feature-resources {
+  background-color: #880E4F; /* 酒红色 */
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.icon-doc {
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.icon-home {
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.icon-screen {
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.icon-vault {
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.feature-desc {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* 活动推荐区 */
+.activity-section {
+  padding: 15px;
+  background-color: white;
+  margin-top: 15px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  height: 18px;
+  width: 4px;
+  background-color: #1976D2;
+  border-radius: 2px;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.activity-info {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.activity-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.activity-time {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.activity-right {
+  position: relative;
+  width: 100px;
+}
+
+.activity-image {
+  width: 100px;
+  height: 70px;
+  border-radius: 4px;
+}
+
+.activity-share {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-icon {
+  width: 16px;
+  height: 16px;
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+/* 底部导航栏 */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0px;
+  display: flex;
+  background-color: white;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.tab-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.tab-text {
+  font-size: 12px;
+  color: #666;
+}
+
+.tab-active .tab-text {
+  color: #1976D2;
+}
+
+.icon-home, .icon-vip, .icon-community, .icon-profile {
+  /* 替换成实际的图标 */
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.tab-active .icon-home {
+  /* 替换成实际的激活图标 */
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 15px;
+}
+
+.resource-block {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.resource-left .resource-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

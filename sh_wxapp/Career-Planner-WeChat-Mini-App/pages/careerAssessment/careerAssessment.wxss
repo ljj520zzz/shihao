@@ -1,0 +1,84 @@
+.tab-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 10px 0;
+  margin-top: 15px; /* 添加顶部边距 */
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+}
+
+.tab-active {
+  color: #1976D2;
+}
+
+.assessment-list {
+  flex: 1;
+  padding: 15px;
+  height: calc(100vh - 120px); /* Adjust based on your header and footer heights */
+}
+
+.assessment-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.assessment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.assessment-info {
+  flex: 1;
+}
+
+.assessment-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.assessment-desc {
+  font-size: 12px;
+  color: #999;
+}
+
+.assessment-arrow {
+  width: 20px;
+  height: 20px;
+  background: url('data:image/svg+xml;charset=utf-8,...') no-repeat center;
+  background-size: contain;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 10px 0;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+  color: #666;
+}
+
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+} 

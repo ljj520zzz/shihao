@@ -1,0 +1,200 @@
+<!--pages/aiPlan/aiPlan.wxml-->
+<navigation-bar title="" back="{{false}}" color="#FFF" background="#1976D2">
+  <view slot="left" class="nav-left">
+    <!-- 自定义返回按钮 -->
+    <view class="custom-back-button" bindtap="handleBackButton">
+      <view class="back-arrow"></view>
+    </view>
+    <view class="menu-icon" bindtap="toggleSidebar">
+      <span></span>
+    </view>
+    <view class="new-chat-icon" bindtap="createNewChat">
+      <view class="chat-icon"></view>
+    </view>
+  </view>
+  <view slot="center" class="nav-center">
+    <view class="nav-title">职业规划助手</view>
+  </view>
+</navigation-bar>
+
+<view class="container">
+  <!-- 顶部logo区域 - 仅在没有消息时显示 -->
+  <view class="logo-area" wx:if="{{messages.length === 0}}">
+    <view class="logo-text">职业规划助手</view>
+    <view class="logo-clouds"></view>
+  </view>
+
+  <!-- 主聊天区域 -->
+  <scroll-view 
+    id="messageScroll"
+    scroll-y="{{true}}" 
+    class="message-area" 
+    enable-flex="{{true}}"
+    refresher-enabled="{{false}}"
+    enable-back-to-top="{{true}}"
+    scroll-anchoring="{{true}}"
+    enhanced="{{true}}"
+    bounces="{{true}}"
+    show-scrollbar="{{true}}"
+  >
+    <block wx:if="{{messages.length === 0}}">
+      <view class="empty-chat">
+        <view class="welcome-card">
+          <view class="welcome-title">开始与AI助手对话吧！</view>
+          <view class="welcome-desc">提出你的问题，获取智能回答</view>
+        </view>
+        
+        <view class="suggestion-list">
+          <view class="suggestion-item" bindtap="usePromptTemplate" data-prompt="请帮我分析一下软件工程师的职业发展路径">
+            <view class="suggestion-number">1</view>
+            <view class="suggestion-text">分析软件工程师的职业发展路径</view>
+          </view>
+          <view class="suggestion-item" bindtap="usePromptTemplate" data-prompt="如何从零开始学习人工智能？">
+            <view class="suggestion-number">2</view>
+            <view class="suggestion-text">如何从零开始学习人工智能？</view>
+          </view>
+          <view class="suggestion-item" bindtap="usePromptTemplate" data-prompt="分析一下我适合什么类型的工作？">
+            <view class="suggestion-number">3</view>
+            <view class="suggestion-text">分析我适合什么类型的工作？</view>
+          </view>
+          <view class="suggestion-item" bindtap="usePromptTemplate" data-prompt="如何准备一份优秀的简历？">
+            <view class="suggestion-number">4</view>
+            <view class="suggestion-text">如何准备一份优秀的简历？</view>
+          </view>
+          <view class="suggestion-item" bindtap="usePromptTemplate" data-prompt="职场沟通有哪些技巧？">
+            <view class="suggestion-number">5</view>
+            <view class="suggestion-text">职场沟通有哪些技巧？</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view 
+      wx:for="{{messages}}" 
+      wx:key="id" 
+      id="msg-{{index}}"
+      class="message {{item.sender === 'user' ? 'user-message' : 'ai-message'}}"
+    >
+      <view class="message-avatar">
+        <view class="{{item.sender === 'user' ? 'user-avatar' : 'ai-avatar'}}"></view>
+      </view>
+      <view class="message-content">
+        <view class="message-text">{{item.content}}</view>
+      </view>
+      <view class="message-time">{{formatTime(item.timestamp)}}</view>
+      <!-- AI消息的反馈按钮 -->
+      <view wx:if="{{item.sender === 'ai'}}" class="message-feedback">
+        <view class="feedback-button" bindtap="giveFeedback" data-type="dislike" data-id="{{item.id}}">
+          <view class="thumbs-down-icon"></view>
+        </view>
+        <view class="feedback-button" bindtap="giveFeedback" data-type="like" data-id="{{item.id}}">
+          <view class="thumbs-up-icon"></view>
+        </view>
+        <view class="feedback-button" bindtap="copyMessage" data-content="{{item.content}}">
+          <view class="copy-icon"></view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{isLoading}}" class="loading-indicator">
+      <view class="loading-dots">
+        <view class="dot"></view>
+        <view class="dot"></view>
+        <view class="dot"></view>
+      </view>
+    </view>
+  </scroll-view>
+  
+  <!-- 底部工具栏 -->
+  <view class="bottom-toolbar">
+    <view class="input-area">
+      <view class="input-container">
+        <view class="mic-button" bindtap="activateVoiceInput">
+          <view class="mic-icon"></view>
+        </view>
+        <textarea class="message-input" 
+                  bindinput="onInputChange" 
+                  value="{{inputMessage}}" 
+                  placeholder="有什么想问的，尽管问我吧..." 
+                  placeholder-style="line-height: 40rpx; color: #999;"
+                  auto-height 
+                  maxlength="4000" 
+                  adjust-position="{{false}}" 
+                  show-confirm-bar="{{false}}" 
+                  cursor-spacing="20" 
+                  fixed="{{true}}" 
+                  hold-keyboard="{{true}}"></textarea>
+        <view class="input-actions">
+          <button class="send-button {{inputMessage.length > 0 ? 'active' : ''}}" bindtap="sendMessage" disabled="{{inputMessage.length === 0 || isLoading}}">
+            <view class="send-icon"></view>
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 底部控制栏 -->
+    <view class="bottom-control-bar">
+      <view class="control-button new-chat-button-bottom" bindtap="createNewChat">
+        <view class="new-chat-icon-bottom"></view>
+        <text>新对话</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 侧边栏 - 对话历史列表 -->
+  <view class="sidebar {{showSidebar ? 'show' : 'hide'}}">
+    <view class="sidebar-header">
+      <view class="sidebar-title">历史对话</view>
+      <view class="close-sidebar" bindtap="toggleSidebar">✕</view>
+    </view>
+    
+    <view class="history-list">
+      <view class="search-box">
+        <input type="text" placeholder="搜索对话历史" bindinput="searchHistory" />
+        <view class="search-icon"></view>
+      </view>
+      
+      <scroll-view scroll-y class="chat-list">
+        <view wx:if="{{filteredChatHistory.length === 0}}" class="empty-history">
+          <view class="empty-history-icon"></view>
+          <view class="empty-history-text">暂无对话记录</view>
+        </view>
+        
+        <view 
+          wx:for="{{filteredChatHistory}}" 
+          wx:key="id" 
+          class="chat-item {{currentChatId === item.id ? 'active' : ''}}"
+        >
+          <view class="chat-content" bindtap="selectChat" data-id="{{item.id}}">
+            <view class="chat-title">{{item.title || '新对话'}}</view>
+            <view class="chat-time">{{formatTime(item.timestamp)}}</view>
+          </view>
+          <view class="delete-chat-button" 
+                catchtap="deleteChat" 
+                data-id="{{item.id}}"
+                hover-class="button-hover">
+            <view class="delete-icon"></view>
+            <view class="delete-text">删除</view>
+          </view>
+          <!-- 调试信息，用于检查ID -->
+          <view style="display:none;">ID: {{item.id}}</view>
+        </view>
+      </scroll-view>
+    </view>
+    
+    <view class="new-chat-button" bindtap="createNewChat">
+      <view class="plus-icon">+</view>
+      <text>新对话</text>
+    </view>
+  </view>
+
+  <!-- 设置按钮 -->
+  <view class="settings-button" bindtap="showApiKeyDialog">
+    <view class="settings-icon"></view>
+  </view>
+  
+  <!-- 历史记录按钮 -->
+  <view class="history-float-button" bindtap="toggleSidebar">
+    <view class="history-float-icon"></view>
+  </view>
+</view>
